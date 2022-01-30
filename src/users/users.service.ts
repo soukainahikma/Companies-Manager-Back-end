@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { users } from 'src/db';
 import {v4 as uuid } from "uuid"
-import { CreateUserDto, FindUsersResponseDto, UsersResponseDto, UpdateUserDto} from './dto/user.dto';
+import { CreateUserDto, FindUsersResponseDto, UsersResponseDto, UpdateUserDto, Login} from './dto/user.dto';
 @Injectable()
 export class UserService {
    private Users = users;
@@ -43,5 +43,13 @@ export class UserService {
         });
         this.Users = updatedUserList;
         return updatedUser
+    }
+    loginUser(login: Login) {
+        const tmp = this.Users.find(user => user.email === login.email)
+        if (!tmp)
+            throw new HttpException("User Not Found",404);
+            if (tmp.password !== login.password)
+            throw new HttpException("Wrong Password",404);
+        return tmp;
     }
 }

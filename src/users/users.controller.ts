@@ -1,5 +1,5 @@
 import {Controller,Get, Post, Put,Param,Body, ParseUUIDPipe} from "@nestjs/common";
-import {CreateUserDto, UpdateUserDto,FindUsersResponseDto, UsersResponseDto } from './dto/user.dto'
+import {CreateUserDto, UpdateUserDto,FindUsersResponseDto, UsersResponseDto, Login } from './dto/user.dto'
 import { UserService } from "./users.service";
 
 @Controller('users')
@@ -28,5 +28,9 @@ export class UserController {
 		@Body() body : UpdateUserDto//
 	):UsersResponseDto{
 		return this.UserService.updateUser(body,userId)
+	}
+	@Post('/login')
+	login(@Body() body: Login){
+		return this.UserService.loginUser(body)	
 	}
 }

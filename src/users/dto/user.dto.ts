@@ -29,3 +29,8 @@ export class UpdateUserDto{
     password:string;
     role:string;
 }
+
+export class Login {
+    email: string;
+    password:string;
+}

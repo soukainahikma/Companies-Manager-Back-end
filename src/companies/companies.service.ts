@@ -20,7 +20,7 @@ export class Companieservice {
         })
         if(tmp)
             throw new HttpException("Company Already Exists",400);
-        let newCompany ={
+        let newCompany = {
             id: uuid(),
             ...payload,
             user:userId
